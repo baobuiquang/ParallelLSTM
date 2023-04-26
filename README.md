@@ -58,6 +58,11 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 
 ## EDA & Preprocessing
 
+![Image](/visualization/passengers.png)
+![Image](/visualization/change.png)
+![Image](/visualization/change-normalized.png)
+![Image](/visualization/change-encoded.png)
+
 # Implementation
 
 ## Strategy
@@ -109,6 +114,9 @@ This table compare the running time between sequential and parallel versions usi
 ### Light-version Dataset
 
 blah blah blah
+
+![Image](/visualization/demo-light-losses.png)
+![Image](/visualization/demo-light-result.png)
 
 ### Heavy-version Dataset
 
