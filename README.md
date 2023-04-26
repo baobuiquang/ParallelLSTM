@@ -59,8 +59,61 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 ## EDA & Preprocessing
 
 # Implementation
+
 ## Strategy
+
+blah blah blah
+
 ## Sequential Version
-## GPU Parallel Version
+
+blah blah blah
+
+## Parallel Version (V1)
+
+blah blah blah
+
+## Parallel Version (V2)
+
+blah blah blah
 
 # Result
+
+## Comparison
+
+Hyper-parameters for the comparison: 
+* `num_epochs = 5`
+* `learning_rate = 0.1`
+* `optimize_method = 'minibatch'`
+
+All the versions have the same outputs (training loss and validation loss) -> Correct implementation.
+
+```
+Epoch 0:	Train Loss = 3.9	Valid Loss = 4.2 	 (3.9031626016491523 	 4.2027568799857145)
+Epoch 1:	Train Loss = 3.62	Valid Loss = 3.86 	 (3.6152784161491525 	 3.8615986598000007)
+Epoch 2:	Train Loss = 3.39	Valid Loss = 3.61 	 (3.386136692522034 	 3.6050993745999995)
+Epoch 3:	Train Loss = 3.19	Valid Loss = 3.38 	 (3.1897238797101695 	 3.3849550778)
+Epoch 4:	Train Loss = 3.02	Valid Loss = 3.2 	 (3.0220866195525424 	 3.198618844957143)
+Epoch 5:	Train Loss = 2.88	Valid Loss = 3.04 	 (2.8779136835389827 	 3.0435489866142853)
+```
+
+This table compare the running time between sequential and parallel versions using the `%%time` command.
+
+|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency |
+|-------------|------------------|-----------------|-------------------|-----------|------------|
+| Sequential  |         4min 35s |          629 ms |          4min 35s |  4min 42s |       100% |
+| Parallel V1 |         1min 17s |          344 ms |          1min 18s |  1min 18s |       362% |
+| Parallel V2 |               ms |              ms |                ms |        ms |          % |
+
+## Final Demo
+
+### Light-version Dataset
+
+blah blah blah
+
+### Heavy-version Dataset
+
+blah blah blah
+
+# Conclusion
+
+blah blah blah
