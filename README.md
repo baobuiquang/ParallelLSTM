@@ -6,6 +6,12 @@ CSC14116 - Applied Parallel Programming
 
 19120454 - Bui Quang Bao
 
+# Table of Contents
+
+```
+⚠️ Not done yet ⚠️
+```
+
 # Introduction
 
 In this project, I will analyze and parallel the LSTM model (a RNN - Recurrent Neural Network) in order to improve its training speed and efficiency. By utilizing parallel processing and GPU computing, the model will be able to handle larger datasets and have shorter training duration. The specific task that I want to apply using the LSTM model in this project is time-series prediction - sequence prediction from sequential data. I will implement a raw LSTM model using only Numpy library, analyze, parallelize using Numba library, and measure the efficiency of the parallel version over the sequential version.
@@ -16,7 +22,7 @@ Keywords: `Parallel Processing`, `GPU Computing`, `NVIDIA CUDA`, `Recurrent Neur
 
 ## About RNN and LSTM
 
-A recurrent neural network (RNN) trains on input containing sequences of data as it discovers the relationships between various parts of the input that are time-dependent. An RNN, for instance, can learn about the relationships between words if we give it a sentence's worth of words as input. In doing so, it can also learn about the rules of grammar, such as the connections between verbs and adverbs, etc.
+A recurrent neural network (RNN) trains on input containing sequences of data, as it learns about time dependent relations between different parts of the input. For example, if we send as input a sequence of words, i.e. a sentence, an RNN can learn about the relations between different words, and hence learn rules of grammar such as relationships between verbs and adverbs, etc.
 
 LSTM stands for Long Short-Term Memory. It is a type of recurrent neural network (RNN) that is designed to handle the problem of vanishing gradients in traditional RNNs. LSTM networks have the ability to selectively remember or forget information over long periods of time, making them particularly effective for tasks that involve sequential data, such as speech recognition, language translation, and time series prediction.
 
