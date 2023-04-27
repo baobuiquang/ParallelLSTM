@@ -1,16 +1,31 @@
-# Parallel LSTM training for sequence prediction from sequential data
+<h1 align="center">Parallel LSTM training for sequence prediction from sequential data</h1>
 
-Vietnam National University - University of Science - Falculty of Information Technology
+<p align="center">Vietnam National University - University of Science - Falculty of Information Technology</p>
 
-CSC14116 - Applied Parallel Programming
+<p align="center">CSC14116 - Applied Parallel Programming</p>
 
-19120454 - Bui Quang Bao
+<p align="center">19120454 - Bui Quang Bao</p>
 
 # Table of Contents
 
-```
-⚠️ Not done yet ⚠️
-```
+- [Introduction](#introduction)
+- [Background](#background)
+  * [About RNN and LSTM](#about-rnn-and-lstm)
+  * [LSTM Architecture](#lstm-architecture)
+- [Dataset](#dataset)
+  * [Information](#information)
+  * [Preprocessing](#preprocessing)
+- [Implementation](#implementation)
+  * [Strategy](#strategy)
+  * [Sequential Version](#sequential-version)
+  * [Parallel Version 1](#parallel-version-1)
+  * [Parallel Version 2](#parallel-version-2)
+- [Result](#result)
+  * [Comparison](#comparison)
+  * [Final Demo](#final-demo)
+    + [Light-version Dataset](#light-version-dataset)
+    + [Heavy-version Dataset](#heavy-version-dataset)
+- [Conclusion](#conclusion)
 
 # Introduction
 
@@ -60,11 +75,11 @@ Kaggle Link: https://www.kaggle.com/datasets/chirag19/air-passengers
 
 Format: `CSV` A monthly time series, in thousands.
 
-Original Source: Box, G. E. P., Jenkins, G. M. and Reinsel, G. C. (1976) Time Series Analysis, Forecasting and Control. Third Edition. Holden-Day. Series G.
+Original Source: *Box, G. E. P., Jenkins, G. M. and Reinsel, G. C. (1976) Time Series Analysis, Forecasting and Control. Third Edition. Holden-Day. Series G.*
 
 More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/AirPassengers.html
 
-## EDA & Preprocessing
+## Preprocessing
 
 ![Image](/visualization/passengers.png)
 ![Image](/visualization/change.png)
@@ -85,13 +100,13 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 ⚠️ Not done yet ⚠️
 ```
 
-## Parallel Version (V1)
+## Parallel Version 1
 
 ```
 ⚠️ Not done yet ⚠️
 ```
 
-## Parallel Version (V2)
+## Parallel Version 2
 
 ```
 ⚠️ Not done yet ⚠️
