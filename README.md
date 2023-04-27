@@ -67,19 +67,27 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 
 ## Strategy
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
 
 ## Sequential Version
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
 
 ## Parallel Version (V1)
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
 
 ## Parallel Version (V2)
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
 
 # Result
 
@@ -90,7 +98,9 @@ Hyper-parameters for the comparison:
 * `learning_rate = 0.1`
 * `optimize_method = 'minibatch'`
 
-All the versions have the same outputs (training loss and validation loss) -> Correct implementation.
+All the versions have the same outputs/logs (training loss and validation loss) -> Correct implementation.
+
+Logs (same for all versions):
 
 ```
 Epoch 0:	Train Loss = 3.9	Valid Loss = 4.2 	 (3.9031626016491523 	 4.2027568799857145)
@@ -103,25 +113,50 @@ Epoch 5:	Train Loss = 2.88	Valid Loss = 3.04 	 (2.8779136835389827 	 3.043548986
 
 This table compare the running time between sequential and parallel versions using the `%%time` command.
 
-|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency |
-|-------------|------------------|-----------------|-------------------|-----------|------------|
-| Sequential  |         4min 35s |          629 ms |          4min 35s |  4min 42s |       100% |
-| Parallel V1 |         1min 17s |          344 ms |          1min 18s |  1min 18s |       362% |
-| Parallel V2 |               ms |              ms |                ms |        ms |          % |
+|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency | Evaluate     |
+|-------------|------------------|-----------------|-------------------|-----------|------------|--------------|
+| Sequential  |         4min 29s |          711 ms |          4min 30s |  4min 37s |       100% |              |
+| Parallel V1 |         1min 18s |          430 ms |          1min 19s |  1min 21s |       342% |              |
+| Parallel V2 |             19 s |          100 ms |            19.1 s |    19.1 s |      1450% | Best Version |
+
+*The `Efficiency` column is the comparison with sequential version.*
 
 ## Final Demo
 
 ### Light-version Dataset
 
-blah blah blah
+Hyper-parameters for the demo: 
+* `num_epochs = 50`
+* `learning_rate = 0.1`
+* `optimize_method = 'minibatch'`
+
+Logs:
+
+```
+Implementation: parallel_v2
+Epoch 0:	Train Loss = 3.9	Valid Loss = 4.2 	 (3.9031626016491523 	 4.2027568799857145)
+Epoch 10:	Train Loss = 2.35	Valid Loss = 2.54 	 (2.3531741741525423 	 2.538028188642857)
+Epoch 20:	Train Loss = 1.84	Valid Loss = 2.08 	 (1.842756373281356 	 2.0835125372714285)
+Epoch 30:	Train Loss = 1.63	Valid Loss = 1.94 	 (1.6328545560355934 	 1.9359360391428573)
+Epoch 40:	Train Loss = 1.5	Valid Loss = 1.91 	 (1.4979629829288135 	 1.9138173331857142)
+Epoch 50:	Train Loss = 1.39	Valid Loss = 1.9 	 (1.3898027960457626 	 1.8966150371857142)
+CPU times: user 1min 34s, sys: 279 ms, total: 1min 35s
+Wall time: 1min 36s
+```
+
+Result:
 
 ![Image](/visualization/demo-light-losses.png)
 ![Image](/visualization/demo-light-result.png)
 
 ### Heavy-version Dataset
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
 
 # Conclusion
 
-blah blah blah
+```
+⚠️ Not done yet ⚠️
+```
