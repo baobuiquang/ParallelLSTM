@@ -1,4 +1,4 @@
-<h1 align="center">Parallel LSTM training for sequence prediction from sequential data</h1>
+<h1 align="center">Parallel LSTM Training for Sequence Prediction from Sequential Data</h1>
 
 <p align="center">Vietnam National University - University of Science - Falculty of Information Technology</p>
 
@@ -49,15 +49,15 @@ A basic LSTM neural network contains an input layer, hidden layer and output lay
 
 There are some important steps involved in training an LSTM:
 
-1. Forward Pass (Forward Propagation)
+1. **Forward Pass (Forward Propagation)**
 
    In this step, in general, given an input data point $x = x_1, x_2, ... , x_T$ of $T$ time-steps, the LSTM calculates the output $y = y_1, y_2, ... , y_T$ of $T$ time-steps (this can vary for different applications). All the updates are propagated from $h_1$ to $h_T$.
 
-2. Backward Pass (Backpropagation Through Time)
+2. **Backward Pass (Backpropagation Through Time)**
 
    In this step, the LSTM do the calculating for optimization method, in this project, I used gradient descent. For this, gradients from time-step $T$ have to be propagated all the way back to time-step 1.
  
-3. Parameters Updating
+3. **Parameters Updating**
 
    Now, the LSTM updates the weight matrices using the gradient descent calculated from the previous step.
 
@@ -71,11 +71,11 @@ Description:
 * The classic Box & Jenkins airline data. Monthly totals of international airline passengers, 1949 to 1960. 
 * This dataset provides monthly totals of a US airline passengers from 1949 to 1960. This dataset is taken from an inbuilt dataset of R called AirPassengers.
 
-Kaggle Link: https://www.kaggle.com/datasets/chirag19/air-passengers
-
 Format: `CSV` A monthly time series, in thousands.
 
 Original Source: *Box, G. E. P., Jenkins, G. M. and Reinsel, G. C. (1976) Time Series Analysis, Forecasting and Control. Third Edition. Holden-Day. Series G.*
+
+Kaggle Link: https://www.kaggle.com/datasets/chirag19/air-passengers
 
 More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/AirPassengers.html
 
@@ -89,6 +89,20 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 # Implementation
 
 ## Strategy
+
+Optimization algorithm: **Batch Gradient Descent** (**Mini-Batch Gradient Descent**)
+
+Gradient Descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient of the function at the current point, because this is the direction of steepest descent.
+
+Why Batch Gradient Descent instead of Stochastic Gradient Descent?
+
+|                    | Stochastic Gradient Descent | Batch Gradient Descent     |
+|--------------------|-----------------------------|----------------------------|
+| Quality            | ✖️ Rough gradient          | ✔️ Good gradient           |
+| Speed              | ✔️ Fast                    | ✖️ Slow                    |
+| Parallel Potential |                             | ➜ Benefit from parallelism |
+
+The diagram below presents our strategy for LSTM training parallel implementation:
 
 ![Image](/assets/strategy.png)
 
