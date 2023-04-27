@@ -45,7 +45,7 @@ LSTM stands for Long Short-Term Memory. It is a type of recurrent neural network
 
 A basic LSTM neural network contains an input layer, hidden layer and output layer, containing $n_x$, $n_h$ and $n_y$ nodes. A data point $x_i$ contains $n_x$ features at every time-step $t$, sent to the LSTM. The connections between the input and hidden nodes are parametrized by a weight matrix $W_{xh}$ of size $n_x × n_h$. The weights in the hidden layer represent recurrent connections, where connections from hidden layer at time-step $t$ to those at time-step $t + 1$ (i.e. $h_t$ to $h_{t+1}$) are parametrized by a weight matrix $W_{hh}$ of size $n_h × n_h$. Finally, weights from the hidden layer to the output layer at every time-step are parametrized by a weight matrix $W_{hy}$ , of size $n_h × n_y$.
 
-![Image](/assets/lstm.png)
+![Image](/assets/architecture.png)
 
 There are some important steps involved in training an LSTM:
 
@@ -90,9 +90,7 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 
 ## Strategy
 
-```
-⚠️ Not done yet ⚠️
-```
+![Image](/assets/strategy.png)
 
 ## Sequential Version
 
