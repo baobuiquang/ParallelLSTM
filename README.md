@@ -106,6 +106,8 @@ The diagram below presents our strategy for LSTM training parallel implementatio
 
 ![Image](/assets/strategy.png)
 
+![Image](/assets/strategy_2.png)
+
 ## Sequential Version
 
 ```
