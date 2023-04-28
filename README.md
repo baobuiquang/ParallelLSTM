@@ -8,26 +8,29 @@
 
 # Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Background](#background)
   * [About RNN and LSTM](#about-rnn-and-lstm)
   * [LSTM Architecture](#lstm-architecture)
 - [Dataset](#dataset)
   * [Information](#information)
+  * [Task to solve](#task-to-solve)
   * [Preprocessing](#preprocessing)
 - [Implementation](#implementation)
-  * [Strategy](#strategy)
-  * [Sequential Version](#sequential-version)
-  * [Parallel Version 1](#parallel-version-1)
-  * [Parallel Version 2](#parallel-version-2)
+  * [Parallel Strategy](#parallel-strategy)
+  * [Implementation Versions](#implementation-versions)
+    + [Sequential Version](#sequential-version)
+    + [Parallel Version 1](#parallel-version-1)
+    + [Parallel Version 2](#parallel-version-2)
 - [Result](#result)
-  * [Comparison](#comparison)
+  * [Versions Comparison](#versions-comparison)
   * [Final Demo](#final-demo)
 - [Conclusion](#conclusion)
 
 # Introduction
 
-In this project, I will analyze and parallel the LSTM model (a RNN - Recurrent Neural Network) in order to improve its training speed and efficiency. By utilizing parallel processing and GPU computing, the model will be able to handle larger datasets and have shorter training duration. The specific task that I want to apply using the LSTM model in this project is time-series prediction - sequence prediction from sequential data. I will implement a raw LSTM model using only Numpy library, analyze, parallelize using Numba library, and measure the efficiency of the parallel version over the sequential version.
+In this project, we will analyze and parallel the LSTM model (a RNN - Recurrent Neural Network) in order to improve its training speed and efficiency. By utilizing parallel processing and GPU computing, the model will be able to handle larger datasets and have shorter training duration. The specific task that we want to apply using the LSTM model in this project is time-series prediction - sequence prediction from sequential data. We will implement a raw LSTM model using only Numpy library, analyze, parallelize using Numba library, and measure the efficiency of the parallel version over the sequential version.
 
 Keywords: `Parallel Processing`, `GPU Computing`, `NVIDIA CUDA`, `Recurrent Neural Network (RNN)`, `Long Short-Term Memory (LSTM)`
 
@@ -53,7 +56,7 @@ There are some important steps involved in training an LSTM:
 
 2. **Backward Pass (Backpropagation Through Time)**
 
-   In this step, the LSTM do the calculating for optimization method, in this project, I used gradient descent. For this, gradients from time-step $T$ have to be propagated all the way back to time-step 1.
+   In this step, the LSTM do the calculating for optimization method, in this project, we will use gradient descent (more details in the [Implementation](#implementation) section). For this, gradients from time-step $T$ have to be propagated all the way back to time-step 1.
  
 3. **Parameters Updating**
 
@@ -77,6 +80,12 @@ Kaggle Link: https://www.kaggle.com/datasets/chirag19/air-passengers
 
 More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/AirPassengers.html
 
+## Task to solve
+
+Predict/forecast the number of passengers of a US airline.
+
+This is a time-series prediction task and totally fit the purpose of this project, so we will build a LSTM model to solve this task.
+
 ## Preprocessing
 
 ![Image](/visualization/passengers.png)
@@ -86,7 +95,7 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 
 # Implementation
 
-## Strategy
+## Parallel Strategy
 
 Optimization algorithm: **Batch Gradient Descent** (**Mini-Batch Gradient Descent**)
 
@@ -117,7 +126,9 @@ The diagram below presents our strategy for LSTM training parallel implementatio
 
 ![Image](/assets/strategy_2.png)
 
-## Sequential Version
+## Implementation Versions
+
+### Sequential Version
 
 This is sequential implementation of LSTM, all the processes run on CPU.
 
@@ -131,7 +142,7 @@ How to call:
 train_LSTM(implementation = 'sequential')
 ```
 
-## Parallel Version 1
+### Parallel Version 1
 
 This is the first parallel implementation of LSTM to run on GPU.
 
@@ -147,7 +158,7 @@ How to call:
 train_LSTM(implementation = 'parallel_v1')
 ```
 
-## Parallel Version 2
+### Parallel Version 2
 
 This is the second parallel implementation of LSTM to run on GPU.
 
@@ -165,7 +176,7 @@ train_LSTM(implementation = 'parallel_v2')
 
 # Result
 
-## Comparison
+## Versions Comparison
 
 Hyper-parameters for the comparison: 
 * `num_epochs = 5`
