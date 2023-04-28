@@ -97,6 +97,10 @@ This is a time-series prediction task and totally fit the purpose of this projec
 
 ## Parallel Strategy
 
+Loss Function: **Cross-Entropy Loss** (**Log Loss**)
+
+Cross-entropy loss, or log loss, measures the performance of a model whose output is a probability value between 0 and 1. Cross-entropy loss will increase if the predicted probability diverges from the actual value. Cross-entropy loss will be used to adjust model weights during training. The aim is to minimize the loss, the smaller the loss the better the model.
+
 Optimization algorithm: **Batch Gradient Descent** (**Mini-Batch Gradient Descent**)
 
 Gradient Descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient of the function at the current point, because this is the direction of steepest descent.
