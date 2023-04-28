@@ -200,9 +200,9 @@ This table compare the running time between sequential and parallel versions usi
 
 |             |       user |        sys |      total | Wall time | Efficiency | Evaluate        |
 |-------------|------------|------------|------------|-----------|------------|-----------------|
-| Sequential  |   4min 29s |     711 ms |   4min 30s |  4min 37s |       100% |                 |
-| Parallel V1 |   1min 18s |     430 ms |   1min 19s |  1min 21s |       342% |                 |
-| Parallel V2 |       19 s |     100 ms |     19.1 s |    19.1 s |      1450% | 🥇 Best Version |
+| Sequential  |   4min 45s |     808 ms |   4min 45s |  4min 52s |       100% |                 |
+| Parallel V1 |   1min 21s |     407 ms |   1min 21s |  1min 21s |       361% |                 |
+| Parallel V2 |     18.8 s |     100 ms |     18.9 s |    18.9 s |      1545% | 🥇 Best Version |
 
 *The `Efficiency` column is the comparison with sequential version.*
 
