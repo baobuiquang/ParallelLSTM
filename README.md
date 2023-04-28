@@ -23,8 +23,6 @@
 - [Result](#result)
   * [Comparison](#comparison)
   * [Final Demo](#final-demo)
-    + [Light-version Dataset](#light-version-dataset)
-    + [Heavy-version Dataset](#heavy-version-dataset)
 - [Conclusion](#conclusion)
 
 # Introduction
@@ -189,17 +187,15 @@ Epoch 5:	Train Loss = 2.88	Valid Loss = 3.04 	 (2.8779136835389827 	 3.043548986
 
 This table compare the running time between sequential and parallel versions using the `%%time` command.
 
-|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency | Evaluate        |
-|-------------|------------------|-----------------|-------------------|-----------|------------|-----------------|
-| Sequential  |         4min 29s |          711 ms |          4min 30s |  4min 37s |       100% |                 |
-| Parallel V1 |         1min 18s |          430 ms |          1min 19s |  1min 21s |       342% |                 |
-| Parallel V2 |             19 s |          100 ms |            19.1 s |    19.1 s |      1450% | 🥇 Best Version |
+|             |       user |        sys |      total | Wall time | Efficiency | Evaluate        |
+|-------------|------------|------------|------------|-----------|------------|-----------------|
+| Sequential  |   4min 29s |     711 ms |   4min 30s |  4min 37s |       100% |                 |
+| Parallel V1 |   1min 18s |     430 ms |   1min 19s |  1min 21s |       342% |                 |
+| Parallel V2 |       19 s |     100 ms |     19.1 s |    19.1 s |      1450% | 🥇 Best Version |
 
 *The `Efficiency` column is the comparison with sequential version.*
 
 ## Final Demo
-
-### Light-version Dataset
 
 Hyper-parameters for the demo: 
 * `num_epochs = 50`
@@ -224,12 +220,6 @@ Result:
 
 ![Image](/visualization/demo-light-losses.png)
 ![Image](/visualization/demo-light-result.png)
-
-### Heavy-version Dataset
-
-```
-⚠️ Not done yet ⚠️
-```
 
 # Conclusion
 
