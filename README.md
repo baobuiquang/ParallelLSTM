@@ -102,6 +102,17 @@ Why Batch Gradient Descent instead of Stochastic Gradient Descent?
 | Speed              | ✔️ Fast                    | ✖️ Slow                    |
 | Parallel Potential |                             | ➜ Benefit from parallelism |
 
+We will use Batch Gradient Descent as optimization method:
+
+* The training process will loop through a number of epochs (sequential):
+  * For each epoch, divide the dataset into a number of mini-batch (sequential):
+    * For each mini-batch, process through a number of data samples (parallel):
+      * For each data sample, process through 3 main steps: Forward Pass ➜ Backward Pass ➜ Gradient Clipping
+
+Depends on which gradient descent method, we will update the model/network parameters as follow:
+* If we use `fullbatch`, update at the end of an epoch.
+* If we use `minibatch`, update at the end of a minibatch.
+
 The diagram below presents our strategy for LSTM training parallel implementation:
 
 ![Image](/assets/strategy.png)
@@ -110,20 +121,48 @@ The diagram below presents our strategy for LSTM training parallel implementatio
 
 ## Sequential Version
 
+This is sequential implementation of LSTM, all the processes run on CPU.
+
+* Each Epoch runs on: CPU
+  * Each Mini-batch runs on: CPU
+    * Each Data sample runs on: CPU
+
+How to call:
+
 ```
-⚠️ Not done yet ⚠️
+train_LSTM(implementation = 'sequential')
 ```
 
 ## Parallel Version 1
 
+This is the first parallel implementation of LSTM to run on GPU.
+
+This version is not actually "parallel" yet, it's just a quick convert from sequential version to test the ability to run on GPU using `numba`.
+
+* Each Epoch runs on: CPU
+  * Each Mini-batch runs on: **GPU**
+    * Each Data sample runs on: **GPU** (✖️ not thread positioning yet)
+
+How to call:
+
 ```
-⚠️ Not done yet ⚠️
+train_LSTM(implementation = 'parallel_v1')
 ```
 
 ## Parallel Version 2
 
+This is the second parallel implementation of LSTM to run on GPU.
+
+In this version, for each mini-batch we will invoke kernel once, and each data sample in the mini-batch will run on a thread on GPU.
+
+* Each Epoch runs on: CPU
+  * Each Mini-batch runs on: **GPU**
+    * Each Data sample runs on: **GPU** (✔️ thread positioning)
+
+How to call:
+
 ```
-⚠️ Not done yet ⚠️
+train_LSTM(implementation = 'parallel_v2')
 ```
 
 # Result
@@ -135,7 +174,7 @@ Hyper-parameters for the comparison:
 * `learning_rate = 0.1`
 * `optimize_method = 'minibatch'`
 
-All the versions have the same outputs/logs (training loss and validation loss) -> Correct implementation.
+All the versions have the same outputs/logs (training loss and validation loss) ➜ Correct implementation.
 
 Logs (same for all versions):
 
@@ -150,11 +189,11 @@ Epoch 5:	Train Loss = 2.88	Valid Loss = 3.04 	 (2.8779136835389827 	 3.043548986
 
 This table compare the running time between sequential and parallel versions using the `%%time` command.
 
-|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency | Evaluate     |
-|-------------|------------------|-----------------|-------------------|-----------|------------|--------------|
-| Sequential  |         4min 29s |          711 ms |          4min 30s |  4min 37s |       100% |              |
-| Parallel V1 |         1min 18s |          430 ms |          1min 19s |  1min 21s |       342% |              |
-| Parallel V2 |             19 s |          100 ms |            19.1 s |    19.1 s |      1450% | Best Version |
+|             | CPU times - user | CPU times - sys | CPU times - total | Wall time | Efficiency | Evaluate        |
+|-------------|------------------|-----------------|-------------------|-----------|------------|-----------------|
+| Sequential  |         4min 29s |          711 ms |          4min 30s |  4min 37s |       100% |                 |
+| Parallel V1 |         1min 18s |          430 ms |          1min 19s |  1min 21s |       342% |                 |
+| Parallel V2 |             19 s |          100 ms |            19.1 s |    19.1 s |      1450% | 🥇 Best Version |
 
 *The `Efficiency` column is the comparison with sequential version.*
 
