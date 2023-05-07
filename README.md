@@ -84,11 +84,12 @@ More details about the dataset: https://stat.ethz.ch/R-manual/R-devel/library/da
 
 Predict/forecast the number of passengers of a US airline.
 
+![Image](/visualization/passengers.png)
+
 This is a time-series prediction task and totally fit the purpose of this project, so we will build a LSTM model to solve this task.
 
 ## Preprocessing
 
-![Image](/visualization/passengers.png)
 ![Image](/visualization/change.png)
 ![Image](/visualization/change-normalized.png)
 ![Image](/visualization/change-encoded.png)
