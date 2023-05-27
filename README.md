@@ -21,8 +21,10 @@
   * [Parallel Strategy](#parallel-strategy)
   * [Implementation Versions](#implementation-versions)
     + [Sequential Version](#sequential-version)
+    + [Numpy Version](#numpy-version)
     + [Parallel Version 1](#parallel-version-1)
     + [Parallel Version 2](#parallel-version-2)
+    + [Parallel Version 3](#parallel-version-3)
 - [Result](#result)
   * [Versions Comparison](#versions-comparison)
   * [Final Demo](#final-demo)
@@ -137,14 +139,36 @@ The diagram below presents our strategy for LSTM training parallel implementatio
 
 This is sequential implementation of LSTM, all the processes run on CPU.
 
+**Sequential Version:**
+
 * Each Epoch runs on: CPU
-  * Each Mini-batch runs on: CPU
-    * Each Data sample runs on: CPU
+  * Each Mini-batch runs on: **CPU** ✖️
+    * Each Data sample runs on: **CPU** ✖️
+      * Thread positioning: **No** ✖️
+      * Optimize data transferring: **No** ✖️
 
 How to call:
 
 ```
 train_LSTM(implementation = 'sequential')
+```
+
+### Numpy Version
+
+This is sequential implementation of LSTM, use Numpy, all the processes run on CPU.
+
+**Numpy Version:**
+
+* Each Epoch runs on: CPU
+  * Each Mini-batch runs on: **CPU** ✖️
+    * Each Data sample runs on: **CPU** ✖️
+      * Thread positioning: **No** ✖️
+      * Optimize data transferring: **No** ✖️
+
+How to call:
+
+```
+train_LSTM(implementation = 'numpy')
 ```
 
 ### Parallel Version 1
@@ -153,9 +177,13 @@ This is the first parallel implementation of LSTM to run on GPU.
 
 This version is not actually "parallel" yet, it's just a quick convert from sequential version to test the ability to run on GPU using `numba`.
 
+**Parallel V1:**
+
 * Each Epoch runs on: CPU
-  * Each Mini-batch runs on: **GPU**
-    * Each Data sample runs on: **GPU** (✖️ not thread positioning yet)
+  * Each Mini-batch runs on: **GPU** ✔️
+    * Each Data sample runs on: **GPU** ✔️
+      * Thread positioning: **No** ✖️
+      * Optimize data transferring: **No** ✖️
 
 How to call:
 
@@ -169,14 +197,47 @@ This is the second parallel implementation of LSTM to run on GPU.
 
 In this version, for each mini-batch we will invoke kernel once, and each data sample in the mini-batch will run on a thread on GPU.
 
+**Parallel V2:**
+
 * Each Epoch runs on: CPU
-  * Each Mini-batch runs on: **GPU**
-    * Each Data sample runs on: **GPU** (✔️ thread positioning)
+  * Each Mini-batch runs on: **GPU** ✔️
+    * Each Data sample runs on: **GPU** ✔️
+      * Thread positioning: **Yes** ✔️
+      * Optimize data transferring: No ✖️
 
 How to call:
 
 ```
 train_LSTM(implementation = 'parallel_v2')
+```
+
+### Parallel Version 3
+
+This is the third parallel implementation of LSTM to run on GPU.
+
+In this version, for each mini-batch we will invoke kernel once, and each data sample in the mini-batch will run on a thread on GPU. The improvement compared to the version 2 is that in this version, we avoid the unnecessary transfer for read-only data arrays.
+
+By default, Numba automatically transfer NumPy arrays to the device, it can only do so conservatively by *always* transferring device memory back to the host when a kernel finishes. So, we decide to ***manually*** control the transfer behavior for these read-only data arrays:
+* Data: `minibatch_set`
+* Previous parameters information:
+  * `U`
+  * `V`
+  * `W`
+  * `B`
+  * `b_out`
+
+**Parallel V3:**
+
+* Each Epoch runs on: CPU
+  * Each Mini-batch runs on: **GPU** ✔️
+    * Each Data sample runs on: **GPU** ✔️
+      * Thread positioning: **Yes** ✔️
+      * Optimize data transferring: **Yes** ✔️
+
+How to call:
+
+```
+train_LSTM(implementation = 'parallel_v3')
 ```
 
 # Result
@@ -193,21 +254,23 @@ All the versions have the same outputs/logs (training loss and validation loss) 
 Logs (same for all versions):
 
 ```
-Epoch 0:	Train Loss = 3.9	Valid Loss = 4.2 	 (3.9031626016491523 	 4.2027568799857145)
+Epoch 0:	Train Loss = 3.90	Valid Loss = 4.20 	 (3.9031626016491523 	 4.2027568799857145)
 Epoch 1:	Train Loss = 3.62	Valid Loss = 3.86 	 (3.6152784161491525 	 3.8615986598000007)
-Epoch 2:	Train Loss = 3.39	Valid Loss = 3.61 	 (3.386136692522034 	 3.6050993745999995)
+Epoch 2:	Train Loss = 3.39	Valid Loss = 3.61 	 (3.3861366925220340 	 3.6050993745999995)
 Epoch 3:	Train Loss = 3.19	Valid Loss = 3.38 	 (3.1897238797101695 	 3.3849550778)
-Epoch 4:	Train Loss = 3.02	Valid Loss = 3.2 	 (3.0220866195525424 	 3.198618844957143)
+Epoch 4:	Train Loss = 3.02	Valid Loss = 3.20 	 (3.0220866195525424 	 3.198618844957143)
 Epoch 5:	Train Loss = 2.88	Valid Loss = 3.04 	 (2.8779136835389827 	 3.0435489866142853)
 ```
 
 This table compare the running time between sequential and parallel versions using the `%%time` command.
 
-|             |       user |        sys |      total | Wall time | Efficiency | Evaluate        |
-|-------------|------------|------------|------------|-----------|------------|-----------------|
-| Sequential  |   4min 45s |     808 ms |   4min 45s |  4min 52s |       100% |                 |
-| Parallel V1 |   1min 21s |     407 ms |   1min 21s |  1min 21s |       361% |                 |
-| Parallel V2 |     18.8 s |     100 ms |     18.9 s |    18.9 s |      1545% | 🥇 Best Version |
+| Implementation | user | sys | total | Wall time | Efficiency | Evaluate |
+|--|--|--|--|--|--|--|
+| Sequential  | 4min 45s |  566 ms | 4min 46s | 4min 53s |  100% | |
+| Numpy       | 2min 07s |  333 ms | 2min 07s | 2min 10s |  225% | |
+| Parallel V1 | 1min 19s |  328 ms | 1min 19s | 1min 20s |  366% | |
+| Parallel V2 |   18.7 s | 85.9 ms |   18.8 s |   18.8 s | 1558% | |
+| **Parallel V3** |   17.2 s | 77.9 ms |   17.2 s |   17.2 s | 1703% | 🥇 Best Version |
 
 *The `Efficiency` column is the comparison with sequential version.*
 
@@ -238,7 +301,12 @@ Result:
 ![Image](/visualization/demo-light-result.png)
 
 # Conclusion
+| Implementation | Efficiency (vs. Sequential) | Efficiency (vs. Numpy) | Evaluate |
+|--|--|--|--|
+| Sequential  |  ***100%*** | | |
+| Numpy       |  225% | ***100%*** | |
+| Parallel V1 |  366% | 162% | |
+| Parallel V2 | 1558% | 691% | |
+| **Parallel V3** | 1703% | 756% | 🥇 Best Version |
 
-```
-⚠️ Not done yet ⚠️
-```
+We **successfully completed the project** and **reached the goal we stated in the project's proposal (100%)**.
