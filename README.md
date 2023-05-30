@@ -9,6 +9,7 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Resources](#resources)
 - [Introduction](#introduction)
 - [Background](#background)
   * [About RNN and LSTM](#about-rnn-and-lstm)
@@ -29,6 +30,14 @@
   * [Versions Comparison](#versions-comparison)
   * [Final Demo](#final-demo)
 - [Conclusion](#conclusion)
+
+# Resources
+
+* Github Repository: [Github](https://github.com/baobuiquang/ParallelLSTM)
+
+* Source Code: [LSTM.ipynb](https://github.com/baobuiquang/ParallelLSTM/blob/main/LSTM.ipynb)
+
+* Detailed Report: [README](https://github.com/baobuiquang/ParallelLSTM/blob/main/README.md)
 
 # Introduction
 
