@@ -266,11 +266,11 @@ This table compare the running time between sequential and parallel versions usi
 
 | Implementation | user | sys | total | Wall time | Efficiency | Evaluate |
 |--|--|--|--|--|--|--|
-| Sequential  | 4min 45s |  566 ms | 4min 46s | 4min 53s |  100% | |
-| Numpy       | 2min 07s |  333 ms | 2min 07s | 2min 10s |  225% | |
-| Parallel V1 | 1min 19s |  328 ms | 1min 19s | 1min 20s |  366% | |
-| Parallel V2 |   18.7 s | 85.9 ms |   18.8 s |   18.8 s | 1558% | |
-| **Parallel V3** |   17.2 s | 77.9 ms |   17.2 s |   17.2 s | 1703% | 🥇 Best Version |
+| Sequential  | 5min 00s |  660 ms | 5min 01s | 5min 02s |  100% | |
+| Numpy       | 2min 06s |  274 ms | 2min 07s | 2min 07s |  238% | |
+| Parallel V1 | 1min 20s |  355 ms | 1min 20s | 1min 20s |  377% | |
+| Parallel V2 |   18.7 s |   74 ms |   18.7 s |   18.7 s | 1615% | |
+| **Parallel V3** | 17.2 s | 77.9 ms | 17.2 s |   17.2 s | 1703% | 🥇 Best Version |
 
 *The `Efficiency` column is the comparison with sequential version.*
 
@@ -300,13 +300,32 @@ Result:
 ![Image](/visualization/demo-light-losses.png)
 ![Image](/visualization/demo-light-result.png)
 
+### Validation
+
+**RMSE**: 28.720057776462163
+
+This RMSE is a good result, based on the rule: RMSE should be less than 10% of the range or standard deviation of the target variable.
+
+Function to validate the RMSE:
+
+```python
+def is_rmse_good(rmse, target_variable):
+    threshold = 0.1 * (np.max(target_variable) - np.min(target_variable)) # Alternatively: 0.1 * np.std(target_variable)
+    if rmse < threshold:
+        return True
+    else:
+        return False
+```
+
+We got the `True` value from the validation function above. More details at the notebook: [LSTM.ipynb](https://github.com/baobuiquang/ParallelLSTM/blob/main/LSTM.ipynb)
+
 # Conclusion
 | Implementation | Efficiency (vs. Sequential) | Efficiency (vs. Numpy) | Evaluate |
 |--|--|--|--|
 | Sequential  |  ***100%*** | | |
-| Numpy       |  225% | ***100%*** | |
-| Parallel V1 |  366% | 162% | |
-| Parallel V2 | 1558% | 691% | |
-| **Parallel V3** | 1703% | 756% | 🥇 Best Version |
+| Numpy       |  238% | ***100%*** | |
+| Parallel V1 |  377% | 158% | |
+| Parallel V2 | 1615% | 679% | |
+| **Parallel V3** | 1703% | 716% | 🥇 Best Version |
 
 We **successfully completed the project** and **reached the goal we stated in the project's proposal (100%)**.
