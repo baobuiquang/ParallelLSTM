@@ -1,10 +1,6 @@
-<h1 align="center">Parallel LSTM Training for Sequence Prediction from Sequential Data</h1>
+<h1 align="center">Parallel LSTM for Sequence Prediction from Sequential Data</h1>
 
-<p align="center">Vietnam National University - University of Science - Falculty of Information Technology</p>
-
-<p align="center">CSC14116 - Applied Parallel Programming</p>
-
-<p align="center">19120454 - Bui Quang Bao</p>
+<p align="center">Bao Bui-Quang</p>
 
 # Table of Contents
 
